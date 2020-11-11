@@ -20,3 +20,12 @@ class TripView(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
+
+
+
+class TripView(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'id' # new
+    lookup_url_kwarg = 'trip_id' # new
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
