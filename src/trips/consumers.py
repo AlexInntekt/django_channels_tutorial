@@ -4,9 +4,7 @@ from trips.serializers import NestedTripSerializer, TripSerializer
 from trips.models import Trip
 
 
-@database_sync_to_async
-def _get_user_group(self, user):
-    return user.groups.first().name
+
 
 class TaxiConsumer(AsyncJsonWebsocketConsumer):
     groups = ['test']
@@ -18,6 +16,9 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
         serializer.is_valid(raise_exception=True)
         return serializer.create(serializer.validated_data)
 
+    @database_sync_to_async
+    def _get_user_group(self, user):
+        return user.groups.first().name
 
     @database_sync_to_async
     def _get_trip_data(self, trip):
